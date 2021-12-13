@@ -10,7 +10,7 @@ import { CoursesModule } from './courses/courses.module';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'root',
+    password: '@Wesley1silva10',
     database: 'nest',
     autoLoadEntities: true,
     synchronize: true,
