@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+
+  database:
+    image: mysql:5.7
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_DATABASE=root
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ".docker/data:/var/lib/mysql"
+    networks:
+      - default_network
+  
+  
+  app:
+    build: .
+    entrypoint: ./.docker/entrypoint.sh
+    container_name: devTraining
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 3008:3006
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - "database"
+    networks:
+      - default_network
+  
+    
+networks:
+  default_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 173.90.238.0/24  

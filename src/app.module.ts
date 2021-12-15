@@ -7,13 +7,13 @@ import { CoursesModule } from './courses/courses.module';
 @Module({
   imports: [CoursesModule, TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'localhost',
+    host: 'database',
     port: 3306,
     username: 'root',
-    password: '@Wesley1silva10',
+    password: 'root',
     database: 'nest',
     autoLoadEntities: true,
-    synchronize: true,
+    synchronize: false,
 
   })],
   controllers: [AppController],
