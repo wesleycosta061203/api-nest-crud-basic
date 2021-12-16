@@ -4,5 +4,4 @@ if [ ! -f ".env" ]; then
 fi
 
 npm install
-npx typeorm migration:run
 npm run start:dev

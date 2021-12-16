@@ -1,10 +1,11 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Course } from './course.entity';
 
+import {v4 as uuid} from 'uuid';
 @Entity('tags')
 export class Tag {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -14,4 +15,22 @@ export class Tag {
 
   @ManyToMany(() => Course, (course) => course.tags)
   course: Course[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  update_at: Date;
+
+  @DeleteDateColumn()
+  delete_at: Date;
+
+  @BeforeInsert()
+  generatedId(){
+    if (this.id) {
+      return;
+    }
+
+    this.id = uuid();
+  }
 }
